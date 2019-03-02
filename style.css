@@ -34,6 +34,12 @@ p {
     font-size: 50px;
     padding: 40px 0;
 }
+.count-down{
+    font-size: 20px;
+}
+.count-down-date{
+    font-size: 30px;
+}
 
 .owf {
     color: white;

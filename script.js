@@ -4,7 +4,8 @@ var clock = new Vue({
         time: '',
         date: '',
         weatherSymbol: '',
-        weather: ''
+        weather: '',
+        countDown: ''
     }
 });
 
@@ -41,5 +42,19 @@ function updateWeather(){
 
 }
 
+function updateCountDown(){
+    today=new Date();
+    var cmas=new Date(today.getFullYear(), 05, 01);
+    if (today.getMonth()==11 && today.getDate()>25) {
+        cmas.setFullYear(cmas.getFullYear()+1); 
+    }  
+    var one_day=1000*60*60*24;
+    var daysLeft = (Math.ceil((cmas.getTime()-today.getTime())/(one_day)));
+    clock.countDown = daysLeft;
+
+    setTimeout(updateCountDown, 1000*60);
+}
+
 updateTime();
 updateWeather();
+updateCountDown();
