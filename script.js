@@ -13,7 +13,7 @@ var week = ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lör
 
 function updateTime() {
     var date = new Date();
-    var cd = new Date(date.getTime() + 1000*60*60);
+    var cd = new Date(date.getTime() + 2000*60*60);
     clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2);
     clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth()+1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
 
