@@ -44,7 +44,7 @@ function updateWeather(){
 
 function updateCountDown(){
     today=new Date();
-    var cmas=new Date(today.getFullYear(), 05, 01);
+    var cmas=new Date(today.getFullYear(), 06, 16);
     if (today.getMonth()==11 && today.getDate()>25) {
         cmas.setFullYear(cmas.getFullYear()+1); 
     }  
