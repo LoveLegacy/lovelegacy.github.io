@@ -44,13 +44,21 @@ function updateWeather(){
 
 function updateCountDown(){
     today=new Date();
-    var cmas=new Date(today.getFullYear(), 06, 16);
-    if (today.getMonth()==11 && today.getDate()>25) {
-        cmas.setFullYear(cmas.getFullYear()+1); 
-    }  
     var one_day=1000*60*60*24;
-    var daysLeft = (Math.ceil((cmas.getTime()-today.getTime())/(one_day)));
-    clock.countDown = daysLeft;
+
+    var vacation=new Date(today.getFullYear(), 06, 16);
+    var classic=new Date(today.getFullYear(), 07, 26);
+
+    if (today.getMonth()==11 && today.getDate()>25) {
+        vacation.setFullYear(vacation.getFullYear()+1); 
+        classic.setFullYear(classic.getFullYear()+1); 
+    }  
+    
+    var vacationDaysLeft = (Math.ceil((vacation.getTime()-today.getTime())/(one_day)));
+    var classicDaysLeft = (Math.ceil((classic.getTime()-today.getTime())/(one_day)));
+
+    clock.vacationDaysLeft = vacationDaysLeft;
+    clock.classicDaysLeft = classicDaysLeft;
 
     setTimeout(updateCountDown, 1000*60);
 }
