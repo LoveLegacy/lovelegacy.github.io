@@ -5,7 +5,9 @@ var clock = new Vue({
         date: '',
         weatherSymbol: '',
         weather: '',
-        countDown: ''
+        countDown: '',
+        vacationDaysLeft: '',
+        apartmentDaysLeft: ''
     }
 });
 
@@ -13,7 +15,7 @@ var week = ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lör
 
 function updateTime() {
     var date = new Date();
-    var cd = new Date(date.getTime() + 2000*60*60);
+    var cd = new Date(date.getTime() + 1000*60*60);
     clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2);
     clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth()+1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
 
@@ -35,30 +37,29 @@ function updateWeather(){
     })
     .then(function(jsonResponse) {
       clock.weatherSymbol = "owf owf-" + jsonResponse.weather[0].id;
-      clock.weather = Math.round(jsonResponse.main.temp);
-
-      setTimeout(updateWeather, 1000*60);
+      clock.weather = Math.round(jsonResponse.main.temp);      
     });
 
+    setTimeout(updateWeather, 1000*60);
 }
 
 function updateCountDown(){
     today=new Date();
     var one_day=1000*60*60*24;
 
-    var vacation=new Date(today.getFullYear(), 06, 16);
-    var classic=new Date(today.getFullYear(), 07, 26);
+    var vacation=new Date(today.getFullYear(), 11, 24);
+    var apartment=new Date(today.getFullYear(), 10, 29);
 
     if (today.getMonth()==11 && today.getDate()>25) {
         vacation.setFullYear(vacation.getFullYear()+1); 
-        classic.setFullYear(classic.getFullYear()+1); 
+        apartment.setFullYear(classic.getFullYear()+1); 
     }  
     
     var vacationDaysLeft = (Math.ceil((vacation.getTime()-today.getTime())/(one_day)));
-    var classicDaysLeft = (Math.ceil((classic.getTime()-today.getTime())/(one_day)));
+    var apartmentDaysLeft = (Math.ceil((apartment.getTime()-today.getTime())/(one_day)));
 
     clock.vacationDaysLeft = vacationDaysLeft;
-    clock.classicDaysLeft = classicDaysLeft;
+    clock.apartmentDaysLeft = apartmentDaysLeft;
 
     setTimeout(updateCountDown, 1000*60);
 }
